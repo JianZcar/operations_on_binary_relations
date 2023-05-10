@@ -59,11 +59,11 @@ class OrderedPairSet:
     def is_symmetric(self):
         return all([OrderedPair(x.second, x.first) in self for x in self])
 
+    def is_antisymmetric(self):
+        return all([x == y for x in self for y in self if can_composition(x, y) and can_composition(y, x)])
+
     def is_transitive(self):
         return all([OrderedPair(x.first, y.second) in self for x in self for y in self if can_composition(x, y)])
-
-    def is_antisymmetric(self):
-        return all([OrderedPair(x.first, x.second) in self for x in self if x.first != x.second])
 
     def is_equivalence(self):
         return self.is_reflexive() and self.is_symmetric() and self.is_transitive()
