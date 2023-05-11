@@ -77,6 +77,24 @@ class OrderedPairSet:
              for pair in self for other_pair
              in other if can_composition(pair, other_pair)})
 
+    def proof_of_reflexive(self):
+        return ([OrderedPair(x, x) for x in {x.first for x in self}],
+                [OrderedPair(x, x) in self for x in {x.first for x in self}])
+
+    def proof_of_symmetric(self):
+        return ([OrderedPair(x.second, x.first) for x in self],
+                [OrderedPair(x.second, x.first) in self for x in self])
+
+    def proof_of_antisymmetric(self):
+        return ([OrderedPair(x, y) for x in self for y in self if can_composition(x, y) and can_composition(y, x)],
+                [x == y for x in self for y in self if can_composition(x, y) and can_composition(y, x)])
+
+    def proof_of_transitive(self):
+        return ([[OrderedPair(x.first, x.second), OrderedPair(y.first, y.second)]
+                 for x in self for y in self if can_composition(x, y)],
+                [(x.first, y.second) for x in self for y in self if can_composition(x, y)],
+                [OrderedPair(x.first, y.second) in self for x in self for y in self if can_composition(x, y)])
+
 
 def num_will_be_int(char: str) -> int or str:
     try:

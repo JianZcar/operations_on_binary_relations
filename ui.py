@@ -24,3 +24,17 @@ def choosing(items: dict) -> tuple or callable:
     except (ValueError, AssertionError):
         print("Invalid choice.")
         return choosing(items)
+
+
+def y_n_question(question: str) -> bool:
+    """
+    Prompts the user for a yes or no question and returns the corresponding boolean.
+    """
+    try:
+        print(question)
+        choice = input("> ")
+        assert choice.lower() in ["y", "n"]
+        return choice.lower() == "y"
+    except AssertionError:
+        print("Invalid choice.")
+        return y_n_question(question)

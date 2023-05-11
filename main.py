@@ -11,6 +11,7 @@ def main():
         "Exit": exit
     }
     ui.menu(functions)
+    main()
 
 
 if __name__ == '__main__':
