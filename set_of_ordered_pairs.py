@@ -47,6 +47,39 @@ class OrderedPairSet:
     def __contains__(self, item):
         return item in self.set
 
+    def __getitem__(self, index):
+        return list(self.set)[index]
+
+    def __eq__(self, other):
+        return self.set == other.set
+
+    def __hash__(self):
+        return hash(self.set)
+
+    def __or__(self, other):
+        return OrderedPairSet(self.set | other.set)
+
+    def __and__(self, other):
+        return OrderedPairSet(self.set & other.set)
+
+    def __xor__(self, other):
+        return OrderedPairSet(self.set ^ other.set)
+
+    def __sub__(self, other):
+        return OrderedPairSet(self.set - other.set)
+
+    def __le__(self, other):
+        return self.set <= other.set
+
+    def __lt__(self, other):
+        return self.set < other.set
+
+    def __ge__(self, other):
+        return self.set >= other.set
+
+    def __gt__(self, other):
+        return self.set > other.set
+
     def add(self, item):
         self.set.add(item)
 
